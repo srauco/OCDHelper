@@ -1,63 +1,38 @@
-﻿<!DOCTYPE html>
-<html>
-  <head>
-    <title>Acceleration</title>
- 
-    <script type="text/javascript" charset="utf-8" src="PhoneGap.js"></script>
-    <script>
-            // The watch id references the current `watchAcceleration`
-            var watchID = null;
-             
-            //wait for PhoneGap to load
-            document.addEventListener("deviceready", loaded, false);
-             
-            // PhoneGap is ready
-            function loaded() {
-                startWatch();
-            }
-             
-            // Start watching the acceleration
-             
-            function startWatch() {
-                 
-                var previousReading = {
-                    x: null,
-                    y: null,
-                    z: null
-                }
-                 
-                navigator.accelerometer.watchAcceleration(function (acceleration) {
-                  var changes = {},
-                  bound = 0.2;
-                  if (previousReading.x !== null) {
-                      changes.x = Math.abs(previousReading.x, acceleration.x);
-                      changes.y = Math.abs(previousReading.y, acceleration.y);
-                      changes.z = Math.abs(previousReading.z, acceleration.z);
-                  }
-                   
-                  if (changes.x > bound && changes.y > bound && changes.z > bound) {
-                    shaken();
-                  }
-                   
-                  previousReading = {
-                  x: reading.x,
-                  y: reading.y,
-                  z: reading.z
-                  }
-                   
-                  }, onError, { frequency: 2000 });
-            }
-             
-            function shaken(){
-                alert("Shaken");
-            }
-             
-            // Error
-            function onError() {
-                alert('onError!');
-            }    </script>
- 
-  </head>
+﻿<!DOCTYPE HTML>
+<html><head><title>Camera</title></head>
 <body>
-    <div id="accelerometer">Waiting for accelerometer...</div>
-</body></html>
+    <!---------------------------------- Camera ------------------------------------------>
+    <div data-role="page" id="cameraMainPage" data-add-back-btn="true" back-btn-text="back">
+        <div data-role="header">
+            <h1>Camera</h1>
+        </div>
+        <div data-role="content">
+            <ul data-role="listview" data-inset="true">
+                <li><a href="#" id="capturePhoneButton">Capture Photo</a></li>
+                <li><a href="#" id="fromPhotoLibraryButton">From Photo Library</a></li>
+            </ul>
+            
+            <div class="mesgBox">
+                <h5 class="hlabel">Using camera.getPicture method</h5>
+                <ul class="smFont">
+                    <li>For both of the above menu items, URI is used to retrieve the image.<br/>
+                        Along with each image, the corresponding URI is shown.
+                    </li>
+                </ul>           
+            </div>
+            
+            <div data-role="popup" id="popupPhoto" class="ui-content" data-theme="e" data-corners="false">
+                <h5 class="hlabel">Image URI</h5>
+                <p id="pictBox" class="content mesgBox"></p>
+                <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                <img class="popphoto" id="popImage" src="">
+            </div>
+        </div>
+        <div data-role="footer">
+            <div id="cameraStatus"></div>
+        </div>
+        
+        <script type="text/javascript" charset="utf-8" src="js/camera-min.js"></script> 
+    </div>
+</body>
+</html>
