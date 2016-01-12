@@ -64,8 +64,8 @@
     //
     function capturePhoto() {
       // Take picture using device camera and retrieve image as base64-encoded string
-      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50, saveToPhotoAlbum: true, 
-        destinationType: Camera.DestinationType.FILE_URI });
+      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
+        destinationType: destinationType.DATA_URL });
     }
 
     // A button will call this function
@@ -91,8 +91,6 @@
       alert('Failed because: ' + message);
     }
 
-
-
     </script>
   </head>
   <body>
@@ -100,7 +98,7 @@
     <button onclick="capturePhotoEdit();">Capture Editable Photo</button> <br>
     <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
     <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>
-    <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
+    <img style="display:none;width:100%;" id="smallImage" src="" />
     <img style="display:none;" id="largeImage" src="" />
   </body>
 </html>
